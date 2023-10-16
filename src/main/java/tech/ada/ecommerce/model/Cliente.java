@@ -31,6 +31,12 @@ public class Cliente implements Serializable {
     @Column(nullable = false)
     private String senha;
 
+    @Column(nullable = false)
+    private boolean ativo;
+
+    @Column
+    private Date dataDesativacao;
+
     @OneToMany
     private List<Compra> compras;
 
@@ -84,16 +90,32 @@ public class Cliente implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public Date getDataDesativacao() {
+        return dataDesativacao;
+    }
+
+    public void setDataDesativacao(Date dataDesativacao) {
+        this.dataDesativacao = dataDesativacao;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Cliente cliente)) return false;
-        return Objects.equals(getCpf(), cliente.getCpf()) && Objects.equals(getSenha(), cliente.getSenha());
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(id, cliente.id) && Objects.equals(cpf, cliente.cpf);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCpf(), getSenha());
+        return Objects.hash(id, cpf);
     }
 }

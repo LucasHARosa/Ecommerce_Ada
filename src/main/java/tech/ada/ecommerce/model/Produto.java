@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "produtos")
-public class Produtos {
+public class Produto {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private String id;
@@ -20,7 +20,7 @@ public class Produtos {
     private double preco;
 
     private int quantidadeEstoque;
-    public Produtos() {
+    public Produto() {
     }
 
     private String quantidade;
@@ -86,7 +86,7 @@ public class Produtos {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Produtos produtos)) return false;
+        if (!(o instanceof Produto produtos)) return false;
         return Objects.equals(getId(), produtos.getId()) && Objects.equals(getSku(), produtos.getSku());
     }
 
