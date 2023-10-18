@@ -30,13 +30,31 @@ public class Cliente implements Serializable {
     private String email;
     @Column(nullable = false)
     private String senha;
+    @Column(nullable = false)
+    private boolean ativo;
+    @Column
+    private Date dataDesativacao;
 
     @OneToMany
     private List<Compra> compras;
 
     public Cliente() {
     }
+    public boolean isAtivo() {
+        return ativo;
+    }
 
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public Date getDataDesativacao() {
+        return dataDesativacao;
+    }
+
+    public void setDataDesativacao(Date dataDesativacao) {
+        this.dataDesativacao = dataDesativacao;
+    }
     public Long getId() {
         return id;
     }
