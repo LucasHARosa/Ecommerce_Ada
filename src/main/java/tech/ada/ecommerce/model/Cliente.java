@@ -1,9 +1,7 @@
 package tech.ada.ecommerce.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,28 +10,31 @@ import java.util.Objects;
 
 //@Getter
 //@Setter
+//@EqualsAndHashCode
 //@NoArgsConstructor
+//@AllArgsConstructor
 @Entity
-@Table(name = "cliente")
+@Table
 public class Cliente implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="nome_completo", nullable = false)
+
+    @Column(length = 50, nullable = false)
     private String nomeCompleto;
+
     @Column(nullable = false)
     private Date dataNascimento;
-    @Column(length = 11, nullable = false, unique = true)
+
+    @Column(unique = true, nullable = false)
     private String cpf;
-    @Column(nullable = false, unique = true)
+
+    @Column(unique = true, nullable = false)
     private String email;
+
     @Column(nullable = false)
     private String senha;
-    @Column(nullable = false)
-    private boolean ativo;
-    @Column
-    private Date dataDesativacao;
 
     @Column(nullable = false)
     private boolean ativo;
@@ -41,26 +42,32 @@ public class Cliente implements Serializable {
     @Column
     private Date dataDesativacao;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Compra> compras;
 
     public Cliente() {
-    }
-    public boolean isAtivo() {
-        return ativo;
+
     }
 
-    public void setAtivo(boolean ativo) {
+    public Cliente(Long id, String nomeCompleto, Date dataNascimento, String cpf, String email, String senha, boolean ativo) {
+        this.id = id;
+        this.nomeCompleto = nomeCompleto;
+        this.dataNascimento = dataNascimento;
+        this.cpf = cpf;
+        this.email = email;
+        this.senha = senha;
         this.ativo = ativo;
     }
 
-    public Date getDataDesativacao() {
-        return dataDesativacao;
+    public Cliente(String nomeCompleto, Date dataNascimento, String cpf, String email, String senha, boolean ativo) {
+        this.nomeCompleto = nomeCompleto;
+        this.dataNascimento = dataNascimento;
+        this.cpf = cpf;
+        this.email = email;
+        this.senha = senha;
+        this.ativo = ativo;
     }
 
-    public void setDataDesativacao(Date dataDesativacao) {
-        this.dataDesativacao = dataDesativacao;
-    }
     public Long getId() {
         return id;
     }
@@ -108,6 +115,7 @@ public class Cliente implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
     public boolean isAtivo() {
         return ativo;
     }
@@ -122,6 +130,14 @@ public class Cliente implements Serializable {
 
     public void setDataDesativacao(Date dataDesativacao) {
         this.dataDesativacao = dataDesativacao;
+    }
+
+    public List<Compra> getCompras() {
+        return compras;
+    }
+
+    public void setCompras(List<Compra> compras) {
+        this.compras = compras;
     }
 
     @Override
