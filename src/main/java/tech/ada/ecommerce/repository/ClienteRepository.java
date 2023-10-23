@@ -19,6 +19,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     List<Cliente> findByAtivo(boolean ativo);
 
+
+
     @Query("SELECT c FROM Cliente c WHERE c.nomeCompleto ILIKE concat('%', :nome, '%') ORDER BY c.nomeCompleto")
     List<Cliente> findByNomeCompletoCustom(@Param("nome") String nome);
 

@@ -19,7 +19,7 @@ public class Compra {
     private double valorTotal;
     private double valorFrete;
     private double  desconto;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "compra")
     private List<ItemProduto> itens;
 
     @Enumerated(value = EnumType.STRING)
